@@ -19,3 +19,9 @@ class Inventory:
     def read_all() -> dict:
         pass
 
+    def item_value(item):
+        pass
+
+    def total_inventory_value(item):
+        pass
+
