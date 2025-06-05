@@ -1,6 +1,10 @@
+from typing import List
+from tabulate import tabulate
+from colorama import Fore, Style, init
+BOLD = '\033[1m'
 
 
-def readlines(path , strip=False):
+def readlines(path , strip=False) -> List[str]:
     with open(path , "r") as file:
         lines = file.readlines()
         newLines = []
@@ -13,7 +17,19 @@ def readlines(path , strip=False):
                 newLines.append(line)    
         return newLines
 
+def readlineByKey(path , key , strip=False) -> str:
+    for line in readlines(path , strip):
+        if key in line:
+            return line.replace("\n" , "").split(" ")
+
 def clean_txt_data(path):
     users =readlines(path , True)
     with open(path , 'w') as file:
         file.writelines(list(map(lambda a : a + "\n" , users)))
+
+def help_command():
+    init()
+    headers = [BOLD + "COMMAND" ,BOLD + "DETAILS"]
+    data = [["help" , "display info about other commands"] , ["add_item" , "Add item to inventory"] , ["remove_item" , "Delete Item in Inventory"] , ["update_item" , "Update information about item"]
+            ,["inventory" , "Display a table of inventory"] , ["change_password" , "Change your password to new password"] , ["delete_account" , "delete your account"] , ["quit" , "Exit Program"]]
+    print(Fore.CYAN + tabulate(data , headers , tablefmt="grid"))

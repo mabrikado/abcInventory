@@ -1,0 +1,5 @@
+apple 13 2.49
+banana 20 3.45
+orange 45 7.56
+grape 23 9.05
+mango 34 90.56

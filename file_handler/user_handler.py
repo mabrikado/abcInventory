@@ -9,16 +9,10 @@ class UserHandler:
         user = self.read_user(username)
         if user and not override:
             return False
-
-        user_deleted = None
         if override:
-            user_deleted = self.delete_user(username)
-
+            self.delete_user(username)
         with open(self.path, "a") as file:
             file.write(f"{username} {password}\n")    
-
-
-
         return True
 
     def read_user(self , username) -> List[str]:
@@ -36,9 +30,9 @@ class UserHandler:
             return False
 
         def exclude_user(user):
-            return not user.startswith(username + " ")  # could use stricter matching if needed
+            return not user.startswith(username + " ") 
 
-        users = utils.readlines(self.path)  # read first, before wiping the file
+        users = utils.readlines(self.path) 
 
         with open(self.path, "w") as file:
             file.writelines(filter(exclude_user, users))

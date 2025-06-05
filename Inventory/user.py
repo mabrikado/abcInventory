@@ -17,7 +17,9 @@ class User:
 
     def change_password(self , old_password:str , new_password:str) -> bool:
         if old_password == self.password:
-            return self.user_handler.write_user(self.username , new_password , True)
+            self.user_handler.write_user(self.username , new_password , True)
+            self.password = new_password
+            return True
         return False
 
     @staticmethod
