@@ -1,4 +1,4 @@
-from user import User
+# from .user import User
 
-def main(user:User):
+def main(user):
     pass
