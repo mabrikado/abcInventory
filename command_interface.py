@@ -4,8 +4,12 @@ from Inventory import *
 from file_handler import *
 from tabulate import tabulate
 from colorama import Fore, Style, init
+import bcrypt
 
 def main():
+    password = "abc#"
+    password_hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    print(password_hashed.decode("utf-8"))
     BOLD = '\033[1m'
     print(BOLD + Fore.YELLOW + "ABC TRADERS pty(ltd)\n")
     user_handler = UserHandler("database/Users.txt")

@@ -1,11 +1,12 @@
 from typing import *
 from . import utils
+import bcrypt
 
 class UserHandler:
     def __init__(self , path):
         self.path = path
 
-    def write_user(self, username, password, override=False):
+    def write_user(self, username, password, override=False) -> bool:
         user = self.read_user(username)
         if user and not override:
             return False
@@ -22,7 +23,7 @@ class UserHandler:
                 if username in line:
                     return line.replace("\n" , "").split(" ")
                 
-    def delete_user(self, username):
+    def delete_user(self, username) -> bool:
 
         user = self.read_user(username)
 
@@ -41,7 +42,7 @@ class UserHandler:
         utils.clean_txt_data(self.path)
         return True
 
-    def is_file_empty(self):
+    def is_file_empty(self) -> True:
         try:
             with open(self.path , "r") as file:
                 if len(file.read()) == 0:

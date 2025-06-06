@@ -9,7 +9,9 @@ class User:
 
     @staticmethod
     def create_user(username:str , password:str , user_handler:UserHandler) -> Union["User" , None]:
-        if user_handler.write_user(username , password):
+        password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode("utf-8") #store it as str not bytes
+                                               
+        if user_handler.write_user(username , password_hash):
             return User(username , password , user_handler)
 
     def delete_user(self , password) -> bool:
@@ -19,7 +21,7 @@ class User:
 
     def change_password(self , old_password:str , new_password:str) -> bool:
         if old_password == self.password:
-            self.user_handler.write_user(self.username , new_password , True)
+            self.user_handler.write_user(self.username , bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt()).decode("utf-8") , True)
             self.password = new_password
             return True
         return False
@@ -31,7 +33,7 @@ class User:
         if not user:
             return
         
-        if user[1] != password:
+        if not bcrypt.checkpw(password.encode("utf-8") , user[1].encode('utf-8')):
             return
         
         return User(username , password , user_handler)
@@ -40,3 +42,6 @@ class User:
         if not isinstance(value , User):
             return False
         return self.username == value.username and self.password == value.password and self.user_handler == value.user_handler
+    
+    def __str__(self):
+        return f"{self.username}"
