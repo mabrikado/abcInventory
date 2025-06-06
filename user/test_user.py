@@ -1,6 +1,6 @@
 import unittest
 import file_handler
-from Inventory import User
+from user import User
 import os
 import bcrypt
 

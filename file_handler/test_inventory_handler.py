@@ -2,8 +2,6 @@ import unittest
 import file_handler
 import os
 
-
-
 class TestInventoryHandler(unittest.TestCase):
     def setUp(self):
         self.filepath = "inventories.txt"

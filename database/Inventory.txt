@@ -1,5 +1,4 @@
-apple 13 2.49
 orange 45 7.56
 grape 23 9.05
-peaches 5 12.5
 banana 20 15.4
+apple 15 2.56

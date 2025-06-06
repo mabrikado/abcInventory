@@ -4,6 +4,10 @@ from colorama import Fore, Style, init
 BOLD = '\033[1m'
 
 
+def registration_key(filepath:str)->str:
+    with open(filepath , "r") as file:
+        return file.read()
+
 def readlines(path , strip=False) -> List[str]:
     with open(path , "r") as file:
         lines = file.readlines()
@@ -17,10 +21,6 @@ def readlines(path , strip=False) -> List[str]:
                 newLines.append(line)    
         return newLines
 
-def readlineByKey(path , key , strip=False) -> str:
-    for line in readlines(path , strip):
-        if key in line:
-            return line.replace("\n" , "").split(" ")
 
 def clean_txt_data(path):
     users =readlines(path , True)
@@ -30,6 +30,12 @@ def clean_txt_data(path):
 def help_command():
     init()
     headers = [BOLD + "COMMAND" ,BOLD + "DETAILS"]
-    data = [["help" , "display info about other commands"] , ["add_item" , "Add item to inventory"] , ["remove_item" , "Delete Item in Inventory"] , ["update_item" , "Update information about item"]
-            ,["inventory" , "Display a table of inventory"] , ["change_password" , "Change your password to new password"] , ["delete_account" , "delete your account"] , ["quit" , "Exit Program"]]
+    data = [["help" , "display info about other commands"] , 
+            ["add_item" , "Add item to inventory"] , 
+            ["remove_item" , "Delete Item in Inventory"] , 
+            ["update_item" , "Update information about item"],
+            ["inventory" , "Display a table of inventory"] ,
+            ["change_password" , "Change your password to new password"] , 
+            ["delete_account" , "delete your account"] , 
+            ["quit" , "Exit Program"]]
     print(Fore.CYAN + tabulate(data , headers , tablefmt="grid"))

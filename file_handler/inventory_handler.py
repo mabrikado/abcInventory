@@ -1,5 +1,5 @@
 from typing import *
-from ..utils import files
+from utils import files
 
 class InventoryHandler:
     def __init__(self , filepath):

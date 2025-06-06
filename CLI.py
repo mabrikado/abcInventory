@@ -3,15 +3,16 @@ import getpass
 from Inventory import *
 from file_handler import *
 from tabulate import tabulate
+from user import *
 from colorama import Fore, Style, init
 from commands import *
-import bcrypt
 
 def main():
     BOLD = '\033[1m'
     print(BOLD + Fore.YELLOW + "ABC TRADERS pty(ltd)\n")
     user_handler = UserHandler("database/Users.txt")
     inventory_handler = InventoryHandler("database/Inventory.txt")
+    registrationKey = registration_key("database/registrationKey.txt")
     inventory = Inventory(inventory_handler)
     init()
     
@@ -22,7 +23,10 @@ def main():
     if chosen_command  not in ["r" , "l"]:
         print(BOLD + Fore.RED + "Invalid Choice")
         return
-    user_input  = input(BOLD + "Enter username :")
+    
+    print("\n" + BOLD + Fore.GREEN + ("ACCOUNT REGISTRATION" if chosen_command == "r" else "LOGIN") + "\n")
+
+    user_input  = input(BOLD + Fore.CYAN + "Enter username :")
     password_input = getpass.getpass(BOLD + "Enter your password: ")
 
     user = None
@@ -37,6 +41,15 @@ def main():
         #run commands
         command_runner.run_commands()
     else:
+
+        #get registration
+        entered_Key = input(BOLD + Fore.YELLOW + "Enter registration key :")
+
+        #validate key
+        if entered_Key != registrationKey:
+            print(BOLD + Fore.RED + "Invalid Registration Key")
+            return
+
         #register a user
         user = User.create_user(user_input , password_input , user_handler)
         if user:
