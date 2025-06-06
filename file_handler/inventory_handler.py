@@ -1,5 +1,5 @@
 from typing import *
-from . import utils
+from ..utils import files
 
 class InventoryHandler:
     def __init__(self , filepath):
@@ -70,11 +70,11 @@ class InventoryHandler:
         def exclude_item(item):
             return not item.startswith(item_name + " ") 
 
-        users = utils.readlines(self.filepath) 
+        users = files.readlines(self.filepath) 
 
         with open(self.filepath, "w") as file:
             file.writelines(filter(exclude_item, users))
         
         #clean data
-        utils.clean_txt_data(self.filepath)
+        files.clean_txt_data(self.filepath)
         return True

@@ -4,12 +4,10 @@ from Inventory import *
 from file_handler import *
 from tabulate import tabulate
 from colorama import Fore, Style, init
+from commands import *
 import bcrypt
 
 def main():
-    password = "abc#"
-    password_hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    print(password_hashed.decode("utf-8"))
     BOLD = '\033[1m'
     print(BOLD + Fore.YELLOW + "ABC TRADERS pty(ltd)\n")
     user_handler = UserHandler("database/Users.txt")
@@ -28,17 +26,24 @@ def main():
     password_input = getpass.getpass(BOLD + "Enter your password: ")
 
     user = None
+
+    #log user in
     if chosen_command  == "l":
         user = User.log_user(user_input , password_input , user_handler)
         if not user:
             print(BOLD + Fore.RED +"Username or password is invalid!!")
             return
-        commandProcessor.main(user , inventory , BOLD)
+        command_runner = Command(user , inventory)
+        #run commands
+        command_runner.run_commands()
     else:
+        #register a user
         user = User.create_user(user_input , password_input , user_handler)
         if user:
             print(BOLD + Fore.GREEN + "User registered successfully")
-            commandProcessor.main(user , inventory , BOLD)
+            command_runner = Command(user , inventory)
+            #run commands
+            command_runner.run_commands()
         else:
             print(BOLD + Fore.RED + "Something went wrong , User may already exist")
             

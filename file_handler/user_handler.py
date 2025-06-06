@@ -1,5 +1,5 @@
 from typing import *
-from . import utils
+from ..utils import files
 import bcrypt
 
 class UserHandler:
@@ -33,13 +33,13 @@ class UserHandler:
         def exclude_user(user):
             return not user.startswith(username + " ") 
 
-        users = utils.readlines(self.path) 
+        users = files.readlines(self.path) 
 
         with open(self.path, "w") as file:
             file.writelines(filter(exclude_user, users))
         
         #clean data
-        utils.clean_txt_data(self.path)
+        files.clean_txt_data(self.path)
         return True
 
     def is_file_empty(self) -> True:

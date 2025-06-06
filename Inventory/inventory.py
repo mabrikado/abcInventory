@@ -46,5 +46,6 @@ class Inventory:
         BOLD = '\033[1m'
         headers = [BOLD + "item" ,BOLD + "quantity" ,BOLD + "price" ,BOLD + "total"]
         items = self.items_with_totals()
+        print(BOLD + Fore.CYAN + "\nInvetory of ABC Traders")
         print(Fore.BLUE + tabulate(items, headers=headers, tablefmt="grid"))
         print(BOLD + Fore.BLUE + "Total Value :" + str(self.total_inventory_value()))
