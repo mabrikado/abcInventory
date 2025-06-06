@@ -30,8 +30,9 @@ class TestUser(unittest.TestCase):
             self.assertIsNone(User.log_user("sibusissdfdso" , "abce90safdsf#" , self.user_handler))
         
         def test_delete_user(self):
-            self.assertTrue(self.user.delete_user())
-            self.assertFalse(self.user.delete_user())
+            self.assertFalse(self.user.delete_user("sdfdsfds"))
+            self.assertTrue(self.user.delete_user("abc#"))
+            self.assertFalse(self.user.delete_user("abc#"))
         
         def tearDown(self):
             #Delete file after working with it

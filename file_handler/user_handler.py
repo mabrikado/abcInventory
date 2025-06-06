@@ -48,16 +48,6 @@ class UserHandler:
                     return True
                 return True
         except FileNotFoundError:
-            return True    
-
-# filehandler = UserHandler("users.txt")
-# filehandler.write_user("sibusiso" , "abc#")
-
-# # filehandler.write_user("mabrikado" , "assd#" , True)
-# # print(filehandler.read_user("sibusiso"))
-# # print(utils.readlines(filehandler.path))
-# filehandler.delete_user("efg")
-# filehandler.delete_user("sibusiso")
-# print(utils.readlines(filehandler.path , True))
+            return True
 
 

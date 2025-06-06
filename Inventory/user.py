@@ -12,7 +12,9 @@ class User:
         if user_handler.write_user(username , password):
             return User(username , password , user_handler)
 
-    def delete_user(self) -> bool:
+    def delete_user(self , password) -> bool:
+        if password != self.password:
+            return False
         return self.user_handler.delete_user(self.username)
 
     def change_password(self , old_password:str , new_password:str) -> bool:

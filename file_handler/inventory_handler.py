@@ -67,13 +67,13 @@ class InventoryHandler:
         if not read_item:
             return False
 
-        def exclude_user(item):
+        def exclude_item(item):
             return not item.startswith(item_name + " ") 
 
         users = utils.readlines(self.filepath) 
 
         with open(self.filepath, "w") as file:
-            file.writelines(filter(exclude_user, users))
+            file.writelines(filter(exclude_item, users))
         
         #clean data
         utils.clean_txt_data(self.filepath)
