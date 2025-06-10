@@ -58,7 +58,6 @@ class InventoryHandler:
                 return InventoryHandler.inventory_items_str_to_types(items[0:cap])
             items.reverse()
             type(cap)
-            print(InventoryHandler.inventory_items_str_to_types(items[0:cap]))
             return InventoryHandler.inventory_items_str_to_types(items[0:cap])
     
     def delete_item(self , item_name:str):

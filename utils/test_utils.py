@@ -1,5 +1,6 @@
 import unittest
 from . import *
+import os
 
 class TestUtils(unittest.TestCase):
     def setUp(self):
@@ -27,6 +28,12 @@ class TestUtils(unittest.TestCase):
         with open(self.filepath , "w") as file:
             file.write("REG-ABC123-XYZ")
         self.assertEqual("REG-ABC123-XYZ" , registration_key(self.filepath))
+    
+    def tearDown(self):
+        #Delete file after working with it
+        os.remove(self.filepath)
+        return 
+
 
     
 if __name__ == "__main__":
