@@ -34,7 +34,8 @@ def help_command():
             ["add_item" , "Add item to inventory"] , 
             ["remove_item" , "Delete Item in Inventory"] , 
             ["update_item" , "Update information about item"],
-            ["inventory" , "Display a table of inventory"] ,
+            ["inventory" , "Display a table of inventory"] , 
+            ["excel DIRECTORY" , "Write Invetory Data to specified file path"],
             ["change_password" , "Change your password to new password"] , 
             ["delete_account" , "delete your account"] , 
             ["quit" , "Exit Program"]]

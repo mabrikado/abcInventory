@@ -1,6 +1,6 @@
 import Inventory
 import getpass
-from Inventory import *
+# from Inventory import *
 from file_handler import *
 from tabulate import tabulate
 from user import *
@@ -13,7 +13,7 @@ def main():
     user_handler = UserHandler("database/Users.txt")
     inventory_handler = InventoryHandler("database/Inventory.txt")
     registrationKey = registration_key("database/registrationKey.txt")
-    inventory = Inventory(inventory_handler)
+    inventory = Inventory.Inventory(inventory_handler)
     init()
     
     # #prompt user for choice

@@ -2,6 +2,7 @@ from Inventory import *
 import getpass
 from user import *
 BOLD = '\033[1m'
+from excel import *
 
 class CommandException(Exception):
     """Exception raised for invalid commands in Command processor."""
@@ -25,10 +26,11 @@ class Command:
             user (User): Current logged-in user object.
             inventory (Inventory): Inventory instance for item operations.
         """
-        self.user = user
-        self.inventory = inventory
+        self.user:User = user
+        self.inventory:Inventory = inventory
     
     def processor(self, command: str):
+
         """
         Process a given command string and perform associated action.
 
@@ -38,12 +40,13 @@ class Command:
         Raises:
             CommandException: If the command is not recognized.
         """
-        if command.lower() not in ["quit", "change_password", "delete_account", 
+        command = command.split(" ")
+        if command[0].lower() not in ["quit", "change_password", "delete_account", 
                                    "add_item", "remove_item", "update_item", 
-                                   "inventory", "help"]:
-            raise CommandException(command + " is an Invalid Command")
+                                   "inventory", "help" , "excel"]:
+            raise CommandException(" ".join(command) + " is an Invalid Command")
         
-        match command:
+        match command[0].lower():
             case "quit":
                 print(BOLD + Fore.GREEN + "Good Bye Friend")
                 quit()
@@ -59,6 +62,8 @@ class Command:
                 self.update_item()
             case "inventory":
                 self.inventory.display_items()
+            case "excel":
+                self.write_to_excel(command[1]) if len(command) == 2 else self.write_to_excel()
             case "help":
                 help_command()
     
@@ -128,6 +133,16 @@ class Command:
                 print(BOLD + Fore.YELLOW + item_name + " could not be updated; it may not already exist")
         except ValueError:
             print(BOLD + Fore.RED + "Price or quantity is not a valid number")
+    
+    def write_to_excel(self , write_to_path=""):
+        try:
+            if write_to_path and write_to_path[-1] != "/":
+                write_to_path+="/"
+            inventory_handler = self.inventory.inventoryhandler
+            handler = ExcelHandler(inventory_handler.filepath , write_to_path)
+            handler.write_inventory()
+        except OSError:
+            print(BOLD + Fore.RED + "Invalid file directory")
     
     def run_commands(self):
         """

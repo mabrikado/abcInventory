@@ -89,7 +89,7 @@ class Inventory:
         item = self.read_item(item) if not from_list else item
         return round(item[1] * item[2], 2)
 
-    def items_with_totals(self, cap: int = 0, ascending_order: bool = True) -> list:
+    def items_with_totals(self, cap: int = 0, ascending_order: bool = True , as_dict=False) -> list:
         """
         Retrieve all items including their total values.
 
@@ -102,9 +102,22 @@ class Inventory:
         Returns:
             list: List of items with an additional total value appended.
         """
+
         items: List[list] = self.read_items(cap, ascending_order)
+        items_dict = {"Name":[] , "Quantity":[] , "Price":[] , "Value":[]}
         for i in range(len(items)):
+
+            if as_dict:
+                items_dict["Name"].append(items[i][0])
+                items_dict["Quantity"].append(items[i][1])
+                items_dict["Price"].append(items[i][2])
+                items_dict["Value"].append(self.item_total_value(items[i], True))
+                continue
+
             items[i].append(self.item_total_value(items[i], True))
+        
+        if as_dict:
+            return items_dict
         return items
 
     def total_inventory_value(self) -> float:

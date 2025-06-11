@@ -1,7 +1,6 @@
 import unittest
 import file_handler
 from Inventory import *
-
 import os
 
 class TestInvetory(unittest.TestCase):
@@ -18,6 +17,10 @@ class TestInvetory(unittest.TestCase):
         self.assertEqual(42.5 , self.inventoryClass.item_total_value("apple"))
         self.assertEqual(77.8 , self.inventoryClass.item_total_value("banana"))
         self.assertEqual(99.2 , self.inventoryClass.item_total_value("grape"))
+
+    def test_items_with_total(self):
+        self.assertEqual({'Name': ['apple', 'banana', 'grape'], 'Quantity': [5, 10, 8], 'Price': [8.5, 7.78, 12.4], 'Value': [42.5, 77.8, 99.2]},
+                         self.inventoryClass.items_with_totals(0 , True , True))
     
     def test_total_inventory_value(self):
         self.assertEqual(219.5 , self.inventoryClass.total_inventory_value())

@@ -57,7 +57,6 @@ class InventoryHandler:
             if ascending_order:
                 return InventoryHandler.inventory_items_str_to_types(items[0:cap])
             items.reverse()
-            type(cap)
             return InventoryHandler.inventory_items_str_to_types(items[0:cap])
     
     def delete_item(self , item_name:str):
