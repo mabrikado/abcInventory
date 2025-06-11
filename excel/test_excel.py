@@ -67,4 +67,7 @@ class TestExcelHandler(unittest.TestCase):
         self.assertEqual(self.worksheet["A7"].value, "Total")
         self.assertEqual(self.worksheet["D7"].value, 219.5)
 
-
+    def tearDown(self):
+        #Delete file after working with it
+        os.remove("excel/Inventory.xlsx")
+        return 
