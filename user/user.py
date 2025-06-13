@@ -1,5 +1,10 @@
 from typing import Union
 from file_handler import *
+from databaseSQL import DatabaseSQL
+
+
+class UserException(Exception):
+    pass
 
 class User:
     """
@@ -11,7 +16,7 @@ class User:
         user_handler (UserHandler): The handler to read/write user data.
     """
 
-    def __init__(self, username: str, password: str, user_handler: UserHandler):
+    def __init__(self, username: str, password: str, user_handler: UserHandler = None , database:DatabaseSQL=None):
         """
         Initialize a User instance.
 
@@ -23,6 +28,10 @@ class User:
         self.username: str = username
         self.password: str = password
         self.user_handler: UserHandler = user_handler
+        self.database:DatabaseSQL = database
+
+        if not database and not user_handler:
+            raise UserException("User has no data to read")
 
     @staticmethod
     def create_user(username: str, password: str, user_handler: UserHandler) -> Union["User", None]:

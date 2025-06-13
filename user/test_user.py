@@ -1,6 +1,6 @@
 import unittest
 import file_handler
-from user import User
+from user import *
 import os
 import bcrypt
 
@@ -16,6 +16,10 @@ class TestUser(unittest.TestCase):
                 # abc# -> $2b$12$d46u3.Ay1ADynyIILOX6H.vI6JNZDYKuFbPwbSaTirtnS8brgT89e
                 file.write("sibusiso $2b$12$BT7S/j07Qnrsz5OOvi33S.IZq9eL6Bm1Wjof0CS2q26tATHXwkPEe\nmabrikado $2b$12$d46u3.Ay1ADynyIILOX6H.vI6JNZDYKuFbPwbSaTirtnS8brgT89e\n")
         
+        def test_inventory_exception(self):
+            with self.assertRaises(UserException) as cm:
+                User("sbuda" , "luda")
+
         def test_create_user(self):
             self.assertEqual(User("MegaSbu" , "boy77" , self.user_handler) , User.create_user("MegaSbu" , "boy77" , self.user_handler))
             user = self.user_handler.read_user("MegaSbu")
