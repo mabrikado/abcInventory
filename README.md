@@ -82,4 +82,4 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 pip install -r requirements.txt
 
 # Run the application
-python main.py
+python CLI.py
