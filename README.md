@@ -1,33 +1,85 @@
-🧾 ABCInventory
+# 🧾 ABCInventory
 
+**ABCInventory** is a **command-line inventory management system** built specifically for **ABC Traders**. Designed to run in a terminal environment, it provides a lightweight yet powerful solution to manage product stock, user access, and inventory data without relying on complex databases or graphical interfaces.
 
-📋 Description
+---
 
-ABCInventory is a command-line inventory management system designed for ABC Traders. It allows users to efficiently manage products, track inventory, and control user access—all through a simple terminal interface.
-✅ Features
+## 📋 Overview
 
-    📦 Add, update, delete, and view items in the inventory
+ABCInventory empowers small businesses to:
 
-    👤 Create, update, and delete user accounts
+- Maintain a clean, searchable inventory
+- Securely manage multiple user accounts
+- Track stock levels and inventory value
+- Present data in a clear and visually enhanced terminal interface
 
-    🧮 View total inventory value and itemized summaries in a styled table
+This project is ideal for those who want a **simple**, **secure**, and **portable** inventory tool with zero external server dependencies.
 
-🔐 Security
+---
 
-    🔑 Passwords are securely stored using bcrypt hashing
+## ✅ Key Features
 
-    🔍 Passwords are verified using hash comparison on login or password change
+### 📦 Inventory Management
+- Add new items with name, quantity, price, and description
+- Update or remove existing products
+- View complete inventory in table format
+- Low-stock alerts and filters (optional)
 
-    🛡️ A secret registration key is required for new users to sign up
+### 👤 User Management
+- Create, update, or delete user accounts
+- Assign roles (e.g., admin, staff) with permission levels
+- Authenticate users via terminal login
 
-🛠️ Tech Stack
+### 🧮 Reporting
+- Display total inventory value (e.g., total cost or retail price)
+- Generate itemized summaries
+- Styled tables for quick readability using the `tabulate` library
 
-    🐍 Python 3
+---
 
-    🔐 bcrypt – password hashing and verification
+## 🔐 Security
 
-    📁 Text files – used as a lightweight, file-based database
+ABCInventory prioritizes **user data protection** and **access control** with the following measures:
 
-    📊 tabulate – display inventory in styled table formats
+### 🔑 Password Protection
+- All user passwords are **hashed with bcrypt**
+- No plain-text passwords are stored
 
-    🎨 colorama, termcolor – color-coded and styled terminal output
+### 🔍 Authentication & Validation
+- Passwords are validated securely with hash comparisons during login and password changes
+- Strong password enforcement (optional feature)
+
+### 🛡️ Registration Key
+- Only users with a valid **secret registration key** can create new accounts
+- Prevents unauthorized signups
+
+---
+
+## 🛠️ Tech Stack
+
+| Tech                      | Purpose                                      |
+|---------------------------|----------------------------------------------|
+| 🐍 Python 3               | Core programming language                    |
+| 🔐 bcrypt                 | Password hashing and verification            |
+| 📁 Text Files             | Lightweight file-based "database" storage    |
+| 📊 tabulate               | Stylish table generation for inventory views |
+| 🎨 colorama & termcolor   | Styled, color-coded terminal output          |
+
+---
+
+## 🚀 Setup & Usage
+
+```bash
+# Clone the repository
+git clone https://github.com/mabrikado/abcInventory.git
+cd abc-inventory
+
+# (Optional) Create a virtual environment
+python -m venv env
+source env/bin/activate  # On Windows: env\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python main.py
